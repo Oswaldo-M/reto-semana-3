@@ -1,0 +1,9 @@
+producto,unidades_vendidas, ingreso_total, precio_promedio
+Laptop,10,150000.00,15000.00
+Monitor,23,78500.00,3413.04
+Scanner,22,44000.00,2000.00
+Teclado,37,35790.00,967.30
+Impresora,11,28600.00,2600.00
+Webcam,20,24900.00,1245.00
+Audifonos,24,21030.00,876.25
+Mouse,18,4980.00,276.67
