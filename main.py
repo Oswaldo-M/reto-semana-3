@@ -1,58 +1,61 @@
+import sys
 
 
-datos_entrada = """fecha,producto,cantidad,precio_unitario
-2026-01-01,Laptop,2,15000.00
-2026-01-02,Mouse,10,250.00
-2026-01-03,Laptop,1,14500.00
-2026-01-04,Teclado,tres,800.00
-2026-01-05,Mouse,8,abc.00"""
+def main():
+    productos = {}
+    primera_linea = True
 
-lineas = datos_entrada.strip().split('\n')
+    for linea in sys.stdin:  
+        linea= linea.strip()
+        if primera_linea:
+            primera_linea = False
+            continue
 
-productos = {}
+        if not linea:
+            continue
 
-for linea in lineas[1:]:  # Desde la segunda linea
-    partes = linea.split(',')
+        partes = linea.split(',')
 
-    #ingorando lineas invalidas    
-    if len(partes) != 4:
-        continue
-    #parseando la linea
-    fecha = partes[0]
-    producto = partes[1]
-    #ignorando cantidades y precios invalidos
-    try:
-        cantidad = int(partes[2])
-        precio = float(partes[3])
-    except ValueError:
-        continue
-    if producto not in productos:
-        productos[producto] = {
-            "unidades": 0,
-            "ingreso": 0.0
-        }
-    "Acumulando"
-    productos[producto]["unidades"] += cantidad
-    productos[producto]["ingreso"] += cantidad * precio
+        #ingorando lineas invalidas    
+        if len(partes) != 4:
+            continue
+        #parseando la linea
+        fecha = partes[0]
+        producto = partes[1]
+        #ignorando cantidades y precios invalidos
+        try:
+            cantidad = int(partes[2])
+            precio = float(partes[3])
+        except ValueError:
+            continue
+        if producto not in productos:
+            productos[producto] = {
+                "unidades": 0,
+                "ingreso": 0.0
+            }
+        "Acumulando"
+        productos[producto]["unidades"] += cantidad
+        productos[producto]["ingreso"] += cantidad * precio
 
-    #Calculando el precio promedio por producto
-for producto in productos:
-    unidades = productos[producto]["unidades"]
-    ingreso = productos[producto]["ingreso"]
-    productos[producto]["promedio"] = ingreso/unidades if unidades > 0 else 0
-    
-#Ordenando por ingreso descendente
-productos_ordenados = sorted(
-    productos.items(),
-    key=lambda x: x[1]["ingreso"],
-    reverse=True
-)
+        #Calculando el precio promedio por producto
+    for producto in productos:
+        unidades = productos[producto]["unidades"]
+        ingreso = productos[producto]["ingreso"]
+        productos[producto]["promedio"] = ingreso/unidades if unidades > 0 else 0
+        
+    #Ordenando por ingreso descendente
+    productos_ordenados = sorted(
+        productos.items(),
+        key=lambda x: x[1]["ingreso"],
+        reverse=True
+    )
 
-print("producto,unidades_vendidas, ingreso_total, precio_promedio")
-for nombre, datos in productos_ordenados:
-    print(f"{nombre},{datos['unidades']},{datos['ingreso']:.2f},{datos['promedio']:.2f}")
-
+    print("producto,unidades_vendidas, ingreso_total, precio_promedio")
+    for nombre, datos in productos_ordenados:
+        print(f"{nombre},{datos['unidades']},{datos['ingreso']:.2f},{datos['promedio']:.2f}")
 
 
+if __name__ == "__main__":
+    main()
 
     
