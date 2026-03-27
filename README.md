@@ -75,7 +75,7 @@ El programa **ignora automáticamente** líneas que tengan:
 
 ## Ordenamiento
 
-Los resultados se ordenan de forma descendente con base en su ingreso total:
+Los resultados se ordenan de forma descendente con base en su ingreso total
 
 ---
 
