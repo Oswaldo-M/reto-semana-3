@@ -13,10 +13,11 @@ productos = {}
 
 for linea in lineas[1:]:  # Desde la segunda linea
     partes = linea.split(',')
-    
-    #comprueba que haya cuatro columnas
+
+    #ingorando lineas invalidas    
     if len(partes) != 4:
         continue
+    #parseando la linea
     fecha = partes[0]
     producto = partes[1]
     #ignorando cantidades y precios invalidos
@@ -34,7 +35,24 @@ for linea in lineas[1:]:  # Desde la segunda linea
     productos[producto]["unidades"] += cantidad
     productos[producto]["ingreso"] += cantidad * precio
 
-print(productos)
+    #Calculando el precio promedio por producto
+for producto in productos:
+    unidades = productos[producto]["unidades"]
+    ingreso = productos[producto]["ingreso"]
+    productos[producto]["promedio"] = ingreso/unidades if unidades > 0 else 0
+    
+#Ordenando por ingreso descendente
+productos_ordenados = sorted(
+    productos.items(),
+    key=lambda x: x[1]["ingreso"],
+    reverse=True
+)
+
+print("producto,unidades_vendidas, ingreso_total, precio_promedio")
+for nombre, datos in productos_ordenados:
+    print(f"{nombre},{datos['unidades']},{datos['ingreso']:.2f},{datos['promedio']:.2f}")
+
+
 
 
     
