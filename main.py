@@ -28,6 +28,10 @@ def main():
             precio = float(partes[3])
         except ValueError:
             continue
+
+        if precio == float('inf') or precio == float('-inf'):
+            continue
+
         if producto not in productos:
             productos[producto] = {
                 "unidades": 0,
