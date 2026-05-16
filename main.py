@@ -43,14 +43,13 @@ def main():
         ingreso = productos[producto]["ingreso"]
         productos[producto]["promedio"] = ingreso/unidades if unidades > 0 else 0
         
-    #Ordenando por ingreso descendente
-    productos_ordenados = sorted(
-        productos.items(),
-        key=lambda x: x[1]["ingreso"],
-        reverse=True
-    )
+    # Paso 1: ordenar por nombre A→Z
+    productos_ordenados = sorted(productos.items(), key=lambda x: x[0])
 
-    print("producto,unidades_vendidas, ingreso_total, precio_promedio")
+    # Paso 2: ordenar por ingreso de mayor a menor
+    productos_ordenados = sorted(productos_ordenados, key=lambda x: x[1]["ingreso"], reverse=True)
+
+    print("producto,unidades_vendidas,ingreso_total,precio_promedio")
     for nombre, datos in productos_ordenados:
         print(f"{nombre},{datos['unidades']},{datos['ingreso']:.2f},{datos['promedio']:.2f}")
 
